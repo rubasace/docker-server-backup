@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
-exec > >(tee ${LOGFILE}) 2>&1
-
 #Internal Constants
 DONT_STOP_CONFIG_FILE=dont-stop.txt
 BACKUP_IGNORE_CONFIG_FILE=dont-backup.txt
-LOGFILE=docker-backup.log
+LOGFILE="/home/ruben/docker/docker-server-backup/docker-backup.log"
 DEFAULT_BACKUP_FILENAME="docker-backup"
+
+exec > >(tee ${LOGFILE}) 2>&1
+
+
 
 check_mandatory(){
     if [ -z "${DOCKER_COMPOSE_PATH}" ] ; then
