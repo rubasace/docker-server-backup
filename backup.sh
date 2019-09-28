@@ -34,7 +34,7 @@ backup(){
     echo "### Files that will not be backed up: ###"
     cat ${BACKUP_IGNORE_CONFIG_FILE}
 
-    tar -cvpzf ${BACKUP_DIRECTORY}/${BACKUP_FILENAME}_$(date +%F_%R).tar.gz --exclude-from=${BACKUP_IGNORE_CONFIG_FILE} ${PERSISTENT_CONTAINERS_ROOT}
+    tar -cpzf ${BACKUP_DIRECTORY}/${BACKUP_FILENAME}_$(date +%F_%R).tar.gz --exclude-from=${BACKUP_IGNORE_CONFIG_FILE} ${PERSISTENT_CONTAINERS_ROOT}
     echo "###### Finished Backing up persistent volumes ######"
 }
 
@@ -44,14 +44,14 @@ start_stopped_containers(){
     echo "###### Finished starting up stopped containers ######"
 }
 
-echo "########## Starting Docker Server Backup with UID ${UID}##########"
+echo "########## [`date +%F`T`date +%T`]  Starting Docker Server Backup with UID ${UID}##########"
 
 start=`date +%s`
 
 check_mandatory
 
 #Configurable Properties
-: "${BACKUP_FILENAME:=DEFAULT_BACKUP_FILENAME}"
+: "${BACKUP_FILENAME:=${DEFAULT_BACKUP_FILENAME}}"
 
 #TODO dont stop containers without mounted volume on BACKUP_DIRECTORY
 declare NOT_TO_STOP=$(cat ${DONT_STOP_CONFIG_FILE})
@@ -66,5 +66,5 @@ declare TO_STOP=$(docker-compose -f ${DOCKER_COMPOSE_PATH} ps --services | grep 
 
 end=`date +%s`
 runtime=$((end-start))
-echo "########## Finished Docker Server Backup in $runtime seconds ##########"
+echo "########## [`date +%F`T`date +%T`] Finished Docker Server Backup in $runtime seconds ##########"
 
