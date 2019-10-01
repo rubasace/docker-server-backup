@@ -4,11 +4,8 @@ SCRIPT_PATH="$(dirname -- "$0")"
 #Internal Constants
 DONT_STOP_CONFIG_FILE="${SCRIPT_PATH}"/dont-stop.txt
 BACKUP_IGNORE_CONFIG_FILE="${SCRIPT_PATH}"/dont-backup.txt
-LOGFILE="${SCRIPT_PATH}"/docker-backup.log
 DEFAULT_BACKUP_NAME="docker-backup"
 DEFAULT_BACKUPS_TO_KEEP=3
-
-exec > >(tee ${LOGFILE}) 2>&1
 
 
 check_mandatory(){
