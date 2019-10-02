@@ -2,7 +2,7 @@
 
 SCRIPT_PATH="$(dirname -- "$0")"
 
-LOGFILE="${SCRIPT_PATH}"/cron-backup.log
+LOGFILE="${SCRIPT_PATH}"/docker-server-backup.log
 
 exec > >(tee ${LOGFILE}) 2>&1
 
