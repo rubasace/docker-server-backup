@@ -6,5 +6,5 @@ LOGFILE="${SCRIPT_PATH}"/cron-backup.log
 
 exec > >(tee ${LOGFILE}) 2>&1
 
-#${SCRIPT_PATH}/backup.sh
+${SCRIPT_PATH}/backup.sh
 ${SCRIPT_PATH}/update-backup.sh
